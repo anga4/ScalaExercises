@@ -1,0 +1,101 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+#project specific files
+/src/main/scala/votee/Main.scala
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+/project/*/
+# Only exists if Bazel was run
+/bazel-out
+tmp.html
+
+# dependencies
+/node_modules
+
+# profiling files
+chrome-profiler-events*.json
+speed-measure-plugin*.json
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+.bsp/
+.bloop/
+.metals/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
+build
+.classpath*
+.project*
+.settings*
+
+org.scala-ide.sdt.core/META-INF/MANIFEST.MF
+org.scala-ide.sdt.update-site/site.xml
+
+.DS_Store
+project/target/
+*~
+*.swp
+*.aux
+*.nav
+*.out
+*.snm
+*.toc
+*.pdf
+*.lst
+*.log
+*.bbl
+*.blg
+*private*
+*.synctex.gz
+/.scala_dependencies
+
+
+### Scala ###
+*.class
+*.log
+
+# sbt specific
+.cache/
+.history/
+.lib/
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/target/
+project/plugins/project/
+
+# Scala-IDE specific
+.scala_dependencies
+.worksheet
