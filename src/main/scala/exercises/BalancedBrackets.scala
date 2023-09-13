@@ -2,7 +2,7 @@ package exercises
 
 import scala.annotation.tailrec
 
-class BalancedBrackets {
+object BalancedBrackets {
 
   /*
       Solution Logic
@@ -22,9 +22,9 @@ class BalancedBrackets {
       val strLen: Int = x.length
       if (strLen == 0 || strLen % 2 != 0) acc
       else {
-        val firstAndLastChars: String = s"${x(0)}${x(strLen - 1)}"
+        val firstAndLastChars: String = s"${x.head}${x.last}"
         if (strLen == 2) acc :+ firstAndLastChars
-        else stringToBracketPairs(x.substring(1, strLen - 1), acc :+ firstAndLastChars)
+        else stringToBracketPairs(x.tail.dropRight(1), acc :+ firstAndLastChars)
       }
     }
 
@@ -37,33 +37,32 @@ class BalancedBrackets {
       else "NO"
     }
   }
-}
 
-object BalancedBrackets extends BalancedBrackets with App {
-
-  @tailrec
-  def getListOfStrings (n: Int, i: Int = 1, list: List[String] = List()): List[String] = {
-    val getLine = scala.io.StdIn.readLine()
-    if (i >= n) list :+ getLine
-    else getListOfStrings(n, i + 1, list  :+ getLine)
-  }
-
-  @tailrec
-  def checkIfBracketsAreBalanced (list: List[String], i: Int = 0): Unit = {
-    if (i >= list.length) println("\nEnd")
-    else {
-      println(isBalanced(list(i)))
-      checkIfBracketsAreBalanced(list, i + 1)
+  def main(args: Array[String]) : Unit = {
+    @tailrec
+    def getListOfStrings(n: Int, i: Int = 1, list: List[String] = List()): List[String] = {
+      val getLine = scala.io.StdIn.readLine()
+      if (i >= n) list :+ getLine
+      else getListOfStrings(n, i + 1, list :+ getLine)
     }
+
+    @tailrec
+    def checkIfBracketsAreBalanced(list: List[String], i: Int = 0): Unit = {
+      if (i >= list.length) ()
+      else {
+        println(isBalanced(list(i)))
+        checkIfBracketsAreBalanced(list, i + 1)
+      }
+    }
+
+    val numOFStrings: Int = {
+      println("Enter number of strings")
+      scala.io.StdIn.readInt()
+    }
+
+    val listOfStrings: List[String] = getListOfStrings(numOFStrings)
+
+    println("\nResults\n")
+    checkIfBracketsAreBalanced(listOfStrings)
   }
-
-  val numOFStrings: Int = {
-    println("Enter number of strings")
-    scala.io.StdIn.readInt()
-  }
-
-  val listOfStrings: List[String] = getListOfStrings(numOFStrings)
-
-  println("\nResults\n")
-  checkIfBracketsAreBalanced(listOfStrings)
 }
