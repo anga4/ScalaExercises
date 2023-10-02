@@ -15,43 +15,43 @@ object SherlockAndGCD {
         (1st and 2nd)elem, (2nd and 3rd)elem ... (last two)elem
    */
 
-  def checkIfRelativelyPrimeSubsetExists(array: Array[Int]): String = {
+  def checkIfRelativelyPrimeSubsetExists(list: List[Int]): String = {
 
     def gcdOfTwoNumbers(a: Int, b: Int): Int = b match {
       case 0 => a
       case n => gcdOfTwoNumbers(b, a % b)
     }
 
-    def checkIfAnyTwoElementsSatisfy(array: Array[Int], x: Int = 0, y: Int = 1): String = {
-      if (y >= array.length) "NO"
+    def checkIfAnyTwoElementsSatisfy(list: List[Int], x: Int = 0, y: Int = 1): String = {
+      if (y >= list.length) "NO"
       else {
-        val a = array(x)
-        val b = array(y)
+        val a = list(x)
+        val b = list(y)
         if (a < b && gcdOfTwoNumbers(a, b) <= 1) "YES"
-        else checkIfAnyTwoElementsSatisfy(array, x + 1, y + 1)
+        else checkIfAnyTwoElementsSatisfy(list, x + 1, y + 1)
       }
     }
 
-    if (array.init.contains(1) && array.last > 1) "YES"
-    else checkIfAnyTwoElementsSatisfy(array)
+    if (list.init.contains(1) && list.last > 1) "YES"
+    else checkIfAnyTwoElementsSatisfy(list)
   }
 }
 
 object SherlockAndGCDApplication extends App {
 
   val numOfTestCases: Int = scala.io.StdIn.readInt()
-  val listOfTestCases: List[(Int, Array[Int])] = getListOfTestCases(numOfTestCases)
+  val listOfTestCases: List[(Int, List[Int])] = getListOfTestCases(numOfTestCases)
   println("\nOutput\n")
   listOfTestCases.foreach(testCase => println(SherlockAndGCD.checkIfRelativelyPrimeSubsetExists(testCase._2)))
 
 
   @tailrec
-  def getListOfTestCases(n: Int, i: Int = 1, list: List[(Int, Array[Int])] = List()): List[(Int, Array[Int])] = {
-    if (i > n) list
+  def getListOfTestCases(n: Int, i: Int = 1, finalList: List[(Int, List[Int])] = List()): List[(Int, List[Int])] = {
+    if (i > n) finalList
     else {
-      val arrLen = scala.io.StdIn.readInt()
-      val arr = scala.io.StdIn.readLine().split(" ").toArray.map(_.toInt)
-      getListOfTestCases(n, i + 1, list :+ (arrLen, arr))
+      val listLen = scala.io.StdIn.readInt()
+      val list = scala.io.StdIn.readLine().split(" ").toList.map(_.toInt)
+      getListOfTestCases(n, i + 1, finalList :+ (listLen, list))
     }
   }
 }
